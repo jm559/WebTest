@@ -11,7 +11,19 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    correctLogin = ("user", "password")
+    username=''
+    password=''
+
+    if request.method == "POST":
+        username = request.form.get('uname')
+        password = request.form.get('psw')
+        #print(username)
+        #print(password)
+    if correctLogin[0] != username or correctLogin[1] != password:
+        return render_template('incorrectLogin.html')
+
+    return render_template('correctLogin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
